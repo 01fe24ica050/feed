@@ -18,13 +18,21 @@ def feedback_status(avg_rating):
 if __name__ == "__main__":
     script_name = sys.argv[0]
 
-    if len(sys.argv) > 3:
+    # If arguments are provided
+    if len(sys.argv) >= 4:
         student_name = sys.argv[1]
         faculty_name = sys.argv[2]
-        ratings = list(map(int, sys.argv[3:]))
+
+        # Last argument must be rating(s)
+        try:
+            ratings = list(map(int, sys.argv[3:]))
+        except ValueError:
+            print("ERROR: Ratings must be numbers only.")
+            sys.exit(1)
+
         print("User provided feedback details:")
     else:
-        student_name = "chaitanya"
+        student_name = "Sneha"
         faculty_name = "Dr. Rao"
         ratings = [4, 5, 4, 5]
         print("No input given - using default values:")
@@ -37,5 +45,5 @@ if __name__ == "__main__":
     print("Student Name:", student_name)
     print("Faculty Name:", faculty_name)
     print("Ratings:", ratings)
-    print("Average Rating:", avg_rating)
+    print("Average Rating:", round(avg_rating, 2))
     print("Feedback Status:", status)
